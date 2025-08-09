@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মাইন্ড করুন - আপনার মতামত দিন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --secondary: #9b59b6;
+            --light: #f5eef8;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --cloud: #ecf0f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .feedback-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.8s ease;
+        }
+        
+        .feedback-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            resize: vertical;
+            min-height: 150px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(142, 68, 173, 0.3);
+        }
+        
+        .btn-google {
+            background-color: #4285F4;
+            color: white;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .btn-google:hover {
+            background-color: #3367d6;
+        }
+        
+        .btn i {
+            margin-right: 0.8rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.2rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 1.5rem;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .user-email {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .login-prompt {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+        
+        .login-prompt p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .thank-you {
+            text-align: center;
+            padding: 3rem;
+            background: var(--success);
+            color: white;
+            border-radius: 10px;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .thank-you i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        .thank-you p {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #666;
+            font-size: 1rem;
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        /* অ্যানিমেশন */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
+        }
+        
+        /* রেস্পন্সিভ ডিজাইন */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .feedback-card {
+                padding: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-comments"></i>
+            </div>
+            <h1>মাইন্ড করুন</h1>
+            <p class="subtitle">আপনার মূল্যবান মতামত ও পরামর্শ আমাদের কাছে খুবই গুরুত্বপূর্ণ। আপনার চিন্তাভাবনা আমাদের সাথে শেয়ার করুন।</p>
+        </header>
+        
+        <div class="feedback-card">
+            <div id="login-prompt" class="login-prompt">
+                <p>মতামত দিতে গুগল অ্যাকাউন্ট দিয়ে লগইন করুন</p>
+                <button id="google-login" class="btn btn-google">
+                    <i class="fab fa-google"></i> গুগল দিয়ে লগইন
+                </button>
+            </div>
+            
+            <div id="feedback-form" class="hidden">
+                <div class="user-info">
+                    <img id="user-avatar" class="user-avatar" src="" alt="ব্যবহারকারী">
+                    <div>
+                        <div id="user-name" class="user-name"></div>
+                        <div id="user-email" class="user-email"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comment"><i class="fas fa-edit"></i> আপনার মতামত</label>
+                    <textarea id="comment" placeholder="আপনার চিন্তাভাবনা, পরামর্শ বা যে কোনো মতামত এখানে লিখুন..."></textarea>
+                </div>
+                
+                <button id="submit-feedback" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> মতামত পাঠান
+                </button>
+            </div>
+            
+            <div id="thank-you" class="thank-you hidden">
+                <i class="fas fa-check-circle"></i>
+                <p>আপনার মতামতের জন্য ধন্যবাদ!</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© ২০২৩ মাইন্ড করুন। সকল স্বত্ব সংরক্ষিত।</p>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Firebase ইম্পোর্ট
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        
+        // Firebase কনফিগারেশন
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUyLf2fdsRFi0wfP_mzVLi0X_UZLaK8tA",
+            authDomain: "cholo-deki-lets-see.firebaseapp.com",
+            projectId: "cholo-deki-lets-see",
+            storageBucket: "cholo-deki-lets-see.appspot.com",
+            messagingSenderId: "289037265463",
+            appId: "1:289037265463:web:4680f0bf83bafd9ef52db2"
+        };
+        
+        // Firebase ইনিশিয়ালাইজ
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+        
+        // DOM এলিমেন্ট
+        const googleLoginBtn = document.getElementById('google-login');
+        const loginPrompt = document.getElementById('login-prompt');
+        const feedbackForm = document.getElementById('feedback-form');
+        const thankYou = document.getElementById('thank-you');
+        const submitFeedbackBtn = document.getElementById('submit-feedback');
+        const commentInput = document.getElementById('comment');
+        const userName = document.getElementById('user-name');
+        const userEmail = document.getElementById('user-email');
+        const userAvatar = document.getElementById('user-avatar');
+        
+        // গুগল লগইন
+        googleLoginBtn.addEventListener('click', async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                
+                // ইউজার ইনফো আপডেট
+                updateUserInfo(user);
+                loginPrompt.classList.add('hidden');
+                feedbackForm.classList.remove('hidden');
+                
+                // ইউজার ডেটা ফায়ারস্টোরে সেভ
+                await setDoc(doc(db, "users", user.uid), {
+                    নাম: user.displayName,
+                    ইমেইল: user.email,
+                    ছবি: user.photoURL,
+                    শেষ_লগইন: serverTimestamp()
+                }, { merge: true });
+                
+            } catch (error) {
+                console.error('লগইন ত্রুটি:', error);
+                alert('লগইন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
+            }
+        });
+        
+        // ইউজার ইনফো আপডেট
+        function updateUserInfo(user) {
+            userName.textContent = user.displayName || "অজানা ব্যবহারকারী";
+            userEmail.textContent = user.email || "ইমেইল নেই";
+            userAvatar.src = user.photoURL || 'https://i.ibb.co/4Y8xYZy/default-avatar.png';
+        }
+        
+        // ফিডব্যাক সাবমিট
+        submitFeedbackBtn.addEventListener('click', async () => {
+            const comment = commentInput.value.trim();
+            const user = auth.currentUser;
+            
+            if (!comment) {
+                alert('দয়া করে আপনার মতামত লিখুন।');
+                return;
+            }
+            
+            if (user) {
+                try {
+                    await addDoc(collection(db, "comments"), {
+                        userId: user.uid,
+                        userName: user.displayName,
+                        userEmail: user.email,
+                        userPhoto: user.photoURL,
+                        comment: comment,
+                        createdAt: serverTimestamp(),
+                        adminResponse: null,
+                        respondedAt: null
+                    });
+                    
+                    feedbackForm.classList.add('hidden');
+                    thankYou.classList.remove('hidden');
+                    commentInput.value = '';
+                    
+                    // ৩ সেকেন্ড পর ফর্ম রিসেট
+                    setTimeout(() => {
+                        thankYou.classList.add('hidden');
+                        loginPrompt.classList.remove('hidden');
+                        auth.signOut();
+                    }, 3000);
+                    
+                } catch (error) {
+                    console.error('ফিডব্যাক জমা দিতে ত্রুটি:', error);
+                    alert('ফিডব্যাক জমা দিতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+                }
+            }
+        });
+        
+        // অথেন্টিকেশন স্টেট ট্র্যাক
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                updateUserInfo(user);
+                loginPrompt.classList.add('hidden');
+                feedbackForm.classList.remove('hidden');
+            } else {
+                loginPrompt.classList.remove('hidden');
+                feedbackForm.classList.add('hidden');
+                thankYou.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
